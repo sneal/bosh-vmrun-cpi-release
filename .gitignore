@@ -1,6 +1,7 @@
 env.ps1
 env.sh
 bin/
+dist/
 .DS_Store
 dev_releases/
 .dev_builds/

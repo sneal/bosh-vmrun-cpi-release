@@ -1,6 +1,6 @@
 NAME ?= bosh-vmrun-cpi
 RELEASE_DIR = ./dist
-OUTPUT = ./dist/cpi.tgz
+RELEASE = ./dist/cpi.tgz
 VERSION ?= 0.0.0
 GITSHA = $(shell git rev-parse HEAD)
 GITDIRTY = $(shell git diff --quiet HEAD || echo "dirty")
@@ -10,10 +10,10 @@ all: clean release
 
 .PHONY: clean
 clean:
-	@rm -rf dist/
+	@rm -rf $(RELEASE_DIR)
 
 .PHONY: release
-release: $(GO_SOURCES) ## Cross-compile binary for various operating systems
-	@mkdir -p $RELEASE_DIR
-	bosh create-release --sha2 --force --dir . --tarball $OUTPUT
+release:
+	@mkdir -p $(RELEASE_DIR)
+	bosh create-release --sha2 --force --dir . --tarball $(RELEASE)
 
