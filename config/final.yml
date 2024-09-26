@@ -1,7 +1,6 @@
 ---
 final_name: bosh-vmrun-cpi
 blobstore:
-  provider: s3
+  provider: local
   options:
-    bucket_name: bosh-vmrun-cpi-blobs
-    host: https://s3.us-west-001.backblazeb2.com
+    blobstore_path: final_blobs
