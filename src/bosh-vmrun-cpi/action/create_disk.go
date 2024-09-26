@@ -3,8 +3,8 @@ package action
 import (
 	"bosh-vmrun-cpi/driver"
 
+	"github.com/cloudfoundry/bosh-cpi-go/apiv1"
 	boshuuid "github.com/cloudfoundry/bosh-utils/uuid"
-	"github.com/cppforlife/bosh-cpi-go/apiv1"
 )
 
 type CreateDiskMethod struct {

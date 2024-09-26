@@ -3,10 +3,10 @@ package action
 import (
 	"errors"
 
+	"github.com/cloudfoundry/bosh-cpi-go/apiv1"
 	boshlog "github.com/cloudfoundry/bosh-utils/logger"
 	boshsys "github.com/cloudfoundry/bosh-utils/system"
 	boshuuid "github.com/cloudfoundry/bosh-utils/uuid"
-	"github.com/cppforlife/bosh-cpi-go/apiv1"
 
 	"bosh-vmrun-cpi/driver"
 	"bosh-vmrun-cpi/stemcell"

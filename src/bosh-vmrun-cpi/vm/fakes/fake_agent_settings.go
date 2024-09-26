@@ -5,7 +5,7 @@ import (
 	"bosh-vmrun-cpi/vm"
 	"sync"
 
-	"github.com/cppforlife/bosh-cpi-go/apiv1"
+	"github.com/cloudfoundry/bosh-cpi-go/apiv1"
 )
 
 type FakeAgentSettings struct {

@@ -1,27 +1,32 @@
 module bosh-vmrun-cpi
 
 require (
-	github.com/bmatcuk/doublestar v1.1.1 // indirect
-	github.com/c4milo/gotoolkit v0.0.0-20170704181456-e37eeabad07e // indirect
-	github.com/charlievieth/fs v0.0.0-20170613215519-7dc373669fa1 // indirect
-	github.com/cloudfoundry/bosh-utils v0.0.0-20180226215852-d73926502f7c
-	github.com/cppforlife/bosh-cpi-go v0.0.0-20171102051050-24a661ddbeef
-	github.com/go-yaml/yaml v2.1.0+incompatible
-	github.com/gofrs/flock v0.7.0
-	github.com/golang/protobuf v1.2.0 // indirect
-	github.com/hooklift/assert v0.0.0-20170704181755-9d1defd6d214 // indirect
+	github.com/cloudfoundry/bosh-cpi-go v0.0.0-20240924213844-0cb5c41d500e
+	github.com/cloudfoundry/bosh-utils v0.0.496
+	github.com/gofrs/flock v0.12.1
 	github.com/hooklift/govmx v0.0.0-20170704182012-983fd9388b8a
 	github.com/hooklift/iso9660 v1.0.0
-	github.com/kr/pretty v0.1.0 // indirect
-	github.com/nu7hatch/gouuid v0.0.0-20131221200532-179d4d0c4d8d // indirect
-	github.com/onsi/ginkgo v1.4.0
-	github.com/onsi/gomega v1.3.0
+	github.com/onsi/ginkgo v1.16.5
+	github.com/onsi/gomega v1.34.2
 	github.com/rn/iso9660wrap v0.0.0-20180101235755-3a04f8ca150a
-	github.com/stretchr/testify v1.3.0 // indirect
-	golang.org/x/crypto v0.0.0-20190513172903-22d7a77e9e5f
-	golang.org/x/sync v0.0.0-20181221193216-37e7f081c4d4 // indirect
-	gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127 // indirect
-	gopkg.in/yaml.v2 v2.2.2
+	golang.org/x/crypto v0.27.0
+	gopkg.in/yaml.v2 v2.4.0
+	gopkg.in/yaml.v3 v3.0.1
 )
 
-go 1.13
+require (
+	github.com/bmatcuk/doublestar v1.3.4 // indirect
+	github.com/c4milo/gotoolkit v0.0.0-20190525173301-67483a18c17a // indirect
+	github.com/charlievieth/fs v0.0.3 // indirect
+	github.com/fsnotify/fsnotify v1.7.0 // indirect
+	github.com/google/go-cmp v0.6.0 // indirect
+	github.com/hooklift/assert v0.1.0 // indirect
+	github.com/nu7hatch/gouuid v0.0.0-20131221200532-179d4d0c4d8d // indirect
+	github.com/nxadm/tail v1.4.11 // indirect
+	golang.org/x/net v0.29.0 // indirect
+	golang.org/x/sys v0.25.0 // indirect
+	golang.org/x/text v0.18.0 // indirect
+	gopkg.in/tomb.v1 v1.0.0-20141024135613-dd632973f1e7 // indirect
+)
+
+go 1.23

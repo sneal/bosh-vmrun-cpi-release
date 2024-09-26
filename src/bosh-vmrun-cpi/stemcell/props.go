@@ -1,7 +1,7 @@
 package stemcell
 
 import (
-	"github.com/cppforlife/bosh-cpi-go/apiv1"
+	"github.com/cloudfoundry/bosh-cpi-go/apiv1"
 )
 
 type stemcellProps struct {

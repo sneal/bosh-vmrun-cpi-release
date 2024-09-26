@@ -3,7 +3,7 @@ package action
 import (
 	"fmt"
 
-	"github.com/cppforlife/bosh-cpi-go/apiv1"
+	"github.com/cloudfoundry/bosh-cpi-go/apiv1"
 
 	"bosh-vmrun-cpi/driver"
 	"bosh-vmrun-cpi/vm"
@@ -48,11 +48,12 @@ func (c AttachDiskMethod) AttachDisk(vmCID apiv1.VMCID, diskCID apiv1.DiskCID) e
 		return err
 	}
 
-	agentEnv.AttachPersistentDisk(diskCID, struct {
-		Path     string `json:"path"`      //can be removed?
-		VolumeID string `json:"volume_id"` //should be 3?
-		Lun      string `json:"lun"`
-	}{"/dev/sdc", "2", "0"})
+	agentEnv.AttachPersistentDisk(diskCID, apiv1.NewDiskHintFromMap(
+		map[string]interface{}{
+			"path":      "/dev/sdc", //can be removed?
+			"volume_id": "2",        //should be 3?
+			"lun":       "0",
+		}))
 
 	envIsoPath, err := c.agentSettings.GenerateAgentEnvIso(agentEnv)
 	if err != nil {

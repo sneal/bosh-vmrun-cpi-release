@@ -1,7 +1,7 @@
 package vm
 
 import (
-	"github.com/cppforlife/bosh-cpi-go/apiv1"
+	"github.com/cloudfoundry/bosh-cpi-go/apiv1"
 )
 
 //go:generate counterfeiter -o fakes/fake_agent_settings.go agent_settings.go AgentSettings

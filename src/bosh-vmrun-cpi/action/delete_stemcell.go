@@ -4,8 +4,8 @@ import (
 	"bosh-vmrun-cpi/driver"
 	"fmt"
 
+	"github.com/cloudfoundry/bosh-cpi-go/apiv1"
 	boshlog "github.com/cloudfoundry/bosh-utils/logger"
-	"github.com/cppforlife/bosh-cpi-go/apiv1"
 )
 
 type DeleteStemcellMethod struct {

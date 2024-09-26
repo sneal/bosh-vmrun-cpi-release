@@ -1,7 +1,7 @@
 package stemcell
 
 import (
-	"github.com/go-yaml/yaml"
+	"gopkg.in/yaml.v3"
 )
 
 type StemcellManifest struct {

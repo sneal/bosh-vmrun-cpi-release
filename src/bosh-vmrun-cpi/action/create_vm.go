@@ -3,9 +3,9 @@ package action
 import (
 	"fmt"
 
+	"github.com/cloudfoundry/bosh-cpi-go/apiv1"
 	boshlog "github.com/cloudfoundry/bosh-utils/logger"
 	boshuuid "github.com/cloudfoundry/bosh-utils/uuid"
-	"github.com/cppforlife/bosh-cpi-go/apiv1"
 
 	"bosh-vmrun-cpi/driver"
 	"bosh-vmrun-cpi/vm"
@@ -94,7 +94,7 @@ func (c CreateVMMethod) CreateVM(
 		}
 	}
 
-	agentEnv.AttachSystemDisk("0")
+	agentEnv.AttachSystemDisk(apiv1.NewDiskHintFromString("0"))
 
 	if vmProps.Disk > 0 {
 		err = c.driverClient.CreateEphemeralDisk(vmId, vmProps.Disk)
@@ -102,7 +102,7 @@ func (c CreateVMMethod) CreateVM(
 			return newVMCID, err
 		}
 
-		agentEnv.AttachEphemeralDisk("1")
+		agentEnv.AttachEphemeralDisk(apiv1.NewDiskHintFromString("1"))
 	}
 
 	newIsoPath, err := c.agentSettings.GenerateAgentEnvIso(agentEnv)

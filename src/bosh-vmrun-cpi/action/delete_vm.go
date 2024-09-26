@@ -1,8 +1,8 @@
 package action
 
 import (
+	"github.com/cloudfoundry/bosh-cpi-go/apiv1"
 	boshlog "github.com/cloudfoundry/bosh-utils/logger"
-	"github.com/cppforlife/bosh-cpi-go/apiv1"
 
 	"bosh-vmrun-cpi/driver"
 )
