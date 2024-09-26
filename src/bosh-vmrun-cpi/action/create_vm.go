@@ -31,10 +31,10 @@ func NewCreateVMMethod(driverClient driver.Client, agentSettings vm.AgentSetting
 	}
 }
 
-func (c CreateVMMethod) CreateVM(
+func (c CreateVMMethod) CreateVMV2(
 	agentID apiv1.AgentID, stemcellCID apiv1.StemcellCID,
 	cloudProps apiv1.VMCloudProps, networks apiv1.Networks,
-	associatedDiskCIDs []apiv1.DiskCID, vmEnv apiv1.VMEnv) (apiv1.VMCID, error) {
+	associatedDiskCIDs []apiv1.DiskCID, vmEnv apiv1.VMEnv) (apiv1.VMCID, apiv1.Networks, error) {
 
 	vmUuid, _ := c.uuidGen.Generate()
 	newVMCID := apiv1.NewVMCID(vmUuid)
@@ -43,35 +43,35 @@ func (c CreateVMMethod) CreateVM(
 	vmId := "vm-" + vmUuid
 
 	if !c.driverClient.HasVM(stemcellId) {
-		return newVMCID, fmt.Errorf("stemcell does not exist: %s", stemcellId)
+		return newVMCID, apiv1.Networks{}, fmt.Errorf("stemcell does not exist: %s", stemcellId)
 	}
 
 	vmProps, err := vm.NewVMProps(cloudProps)
 	if err != nil {
-		return newVMCID, err
+		return newVMCID, apiv1.Networks{}, err
 	}
 
 	err = c.driverClient.CloneVM(stemcellId, vmId)
 	if err != nil {
-		return newVMCID, err
+		return newVMCID, networks, err
 	}
 
 	err = c.driverClient.SetVMResources(vmId, vmProps.CPU, vmProps.RAM)
 	if err != nil {
-		return newVMCID, err
+		return newVMCID, networks, err
 	}
 
 	for _, network := range networks {
 		adapterName, macAddress, err := c.agentSettings.GetNetworkSettings(network)
 		if err != nil {
-			return newVMCID, err
+			return newVMCID, networks, err
 		}
 
 		network.SetMAC(macAddress)
 
 		err = c.driverClient.SetVMNetworkAdapter(vmId, adapterName, macAddress)
 		if err != nil {
-			return newVMCID, err
+			return newVMCID, networks, err
 		}
 	}
 
@@ -90,7 +90,7 @@ func (c CreateVMMethod) CreateVM(
 			vmProps.Bootstrap.Max_Wait,
 		)
 		if err != nil {
-			return newVMCID, err
+			return newVMCID, networks, err
 		}
 	}
 
@@ -99,7 +99,7 @@ func (c CreateVMMethod) CreateVM(
 	if vmProps.Disk > 0 {
 		err = c.driverClient.CreateEphemeralDisk(vmId, vmProps.Disk)
 		if err != nil {
-			return newVMCID, err
+			return newVMCID, networks, err
 		}
 
 		agentEnv.AttachEphemeralDisk(apiv1.NewDiskHintFromString("1"))
@@ -109,20 +109,29 @@ func (c CreateVMMethod) CreateVM(
 	defer c.agentSettings.Cleanup()
 
 	if err != nil {
-		return newVMCID, err
+		return newVMCID, networks, err
 	}
 
 	err = c.driverClient.UpdateVMIso(vmId, newIsoPath)
 	if err != nil {
-		return newVMCID, err
+		return newVMCID, networks, err
 	}
 
 	if !c.driverClient.NeedsVMNameChange(vmId) {
 		err = c.driverClient.StartVM(vmId)
 		if err != nil {
-			return newVMCID, err
+			return newVMCID, networks, err
 		}
 	}
 
-	return newVMCID, nil
+	return newVMCID, networks, nil
+}
+
+func (c CreateVMMethod) CreateVM(
+	agentID apiv1.AgentID, stemcellCID apiv1.StemcellCID,
+	cloudProps apiv1.VMCloudProps, networks apiv1.Networks,
+	associatedDiskCIDs []apiv1.DiskCID, vmEnv apiv1.VMEnv) (apiv1.VMCID, error) {
+
+	newVMCID, _, err := c.CreateVMV2(agentID, stemcellCID, cloudProps, networks, associatedDiskCIDs, vmEnv)
+	return newVMCID, err
 }
