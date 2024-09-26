@@ -12,7 +12,7 @@ import (
 	"bosh-vmrun-cpi/vmx"
 )
 
-//TODO: use boshfs for fs operations
+// TODO: use boshfs for fs operations
 type ClientImpl struct {
 	vmrunRunner   VmrunRunner
 	ovftoolRunner OvftoolRunner
@@ -403,7 +403,7 @@ func (c ClientImpl) StopVM(vmName string) error {
 	return nil
 }
 
-//TODO: add more graceful handling of locked vmx (when stopped but GUI has them open)
+// TODO: add more graceful handling of locked vmx (when stopped but GUI has them open)
 func (c ClientImpl) DestroyVM(vmName string) error {
 	var err error
 	var vmState string
@@ -474,8 +474,9 @@ func (c ClientImpl) GetVMInfo(vmName string) (VMInfo, error) {
 	return vmInfo, err
 }
 
-//TODO: should match on full VMX path instead of just name
-//      failing due to vmxPath substring not matching with string.Contains (maybe unicode problem?)
+// TODO: should match on full VMX path instead of just name
+//
+//	failing due to vmxPath substring not matching with string.Contains (maybe unicode problem?)
 func (c ClientImpl) vmState(vmName string) (string, error) {
 	result, err := c.vmrunRunner.List()
 	if err != nil {

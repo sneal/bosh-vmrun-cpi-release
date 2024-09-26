@@ -153,7 +153,7 @@ func (r *ovftoolRunnerImpl) cliCommand(args []string, flagMap map[string]string)
 	return stdout, err
 }
 
-//TODO: investigate linking to parent disks https://www.vmware.com/pdf/ovf_spec_draft.pdf (Section 10.1)
+// TODO: investigate linking to parent disks https://www.vmware.com/pdf/ovf_spec_draft.pdf (Section 10.1)
 var tmpl = template.Must(template.New("tmpl").Parse(`<?xml version="1.0" encoding="UTF-8"?>
 <Envelope vmw:buildId="build-1312298" xmlns="http://schemas.dmtf.org/ovf/envelope/1" xmlns:cim="http://schemas.dmtf.org/wbem/wscim/1/common" xmlns:ovf="http://schemas.dmtf.org/ovf/envelope/1" xmlns:rasd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_ResourceAllocationSettingData" xmlns:vmw="http://www.vmware.com/schema/ovf" xmlns:vssd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_VirtualSystemSettingData" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <References>

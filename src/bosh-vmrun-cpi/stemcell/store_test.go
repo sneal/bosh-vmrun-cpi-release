@@ -14,7 +14,7 @@ import (
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 
-	fakes "bosh-vmrun-cpi/stemcell/fakes"
+	"bosh-vmrun-cpi/stemcell/fakes"
 
 	boshcmd "github.com/cloudfoundry/bosh-utils/fileutil"
 	fakelogger "github.com/cloudfoundry/bosh-utils/logger/loggerfakes"

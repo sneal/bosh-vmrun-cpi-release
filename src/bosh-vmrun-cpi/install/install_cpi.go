@@ -70,16 +70,16 @@ func compareCPIVersionsSSH(version, cpiSrcPath, cpiDestPath string, client *ssh.
 		logger.Debug("install-cpi", "comparison error: %s output: %s", err.Error(), string(cpiVersionOutputBytes))
 	}
 
-    notFoundErrorMsgs := []string{
-        "the system cannot find the path specified",
-        "is not recognized as an internal or external command",
-        "no such file or directory",
-    }
-    for _, msg := range notFoundErrorMsgs {
-        if strings.Contains(strings.ToLower(string(cpiVersionOutput)), msg) {
-            return false, nil
-        }
-    }
+	notFoundErrorMsgs := []string{
+		"the system cannot find the path specified",
+		"is not recognized as an internal or external command",
+		"no such file or directory",
+	}
+	for _, msg := range notFoundErrorMsgs {
+		if strings.Contains(strings.ToLower(string(cpiVersionOutput)), msg) {
+			return false, nil
+		}
+	}
 
 	if err != nil {
 		return false, fmt.Errorf("Error: %s; Output: %s", err.Error(), cpiVersionOutput)

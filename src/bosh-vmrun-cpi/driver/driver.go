@@ -74,7 +74,7 @@ type CloneRunner interface {
 	Clone(sourceVmxPath, targetVmxPath, targetVmName string) error
 }
 
-//TODO: move to vm package
+// TODO: move to vm package
 type VMInfo struct {
 	Name string
 	CPUs int
